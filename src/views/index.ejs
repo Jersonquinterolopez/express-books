@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- con los motores de plantilla en este caso con ejs , enviamos el contenido de el head a un archivo separado y aqui especificamos la ruta en donde esta ese archivo (la sintaxis es de ejs.) 
+    unicamente dejamos el title , para que cada pagina o seccion se pueda indentificar con un nombre diferente.-->
+    <% include partials/header %>
+    <title>Hello World</title>
+  </head>
+  <body>
+    <% include partials/navigation %>
+
+    <!-- aqui le decimos que recorra los datos que recibimos en el render y crear una tarjeta por cada libro, usamos un bucle forEach para recorrer el array books y lanzamos una funcion en donde pasamos la estrucura de las tarjetas, (por cada recorrido creamos una tarjeta con su cuerpo)(y en cada tarjeta se van a mostrar los datos) -->
+    <div class="container p-4">
+      <div class="row">
+        <% books.forEach(function (book) { %>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <%= book.title %> / <%= book.author %>
+            </div>
+            <img src="<%= book.image %>" class="card-img-top" />
+            <div class="card-body">
+              <p><%= book.description %></p>
+            </div>
+            <div class="card-footer">
+              <a href="/delete/<%= book.id %>" class="btn btn-danger">
+                Delete
+              </a>
+              <!-- el boton delete lo manejamos como un enlace que va a enviar al servidor el id de lo que queremos eliminar especificamente. -->
+            </div>
+          </div>
+        </div>
+        <% }) %>
+        <!-- el cierre de linea de ejs sintaxis , tiene que ir tanto en la etiqueta de arriba como en la de abajo -->
+      </div>
+    </div>
+  </body>
+</html>
